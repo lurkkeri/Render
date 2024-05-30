@@ -1,4 +1,4 @@
-from app import Flask, request, jsonify
+from flask import Flask, request, jsonify
 import joblib
 import nltk
 from nltk.corpus import stopwords
