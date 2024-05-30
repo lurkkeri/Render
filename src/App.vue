@@ -1,17 +1,17 @@
 
 <template>
   <div id="app">
-    <SpamHamPredictor />
+    <SpamHam />
   </div>
 </template>
 
 <script>
-import SpamHamPredictor from './components/SpamHamPredictor.vue';
+import SpamHam from './components/SpamHam.vue';
 
 export default {
   name: 'App',
   components: {
-    SpamHamPredictor
+    SpamHam
   }
 };
 </script>
