@@ -1,7 +1,3 @@
-<script setup>
-import SpamHamPredictor from './components/SpamHam.vue'
-
-</script>
 
 <template>
   <div id="app">
