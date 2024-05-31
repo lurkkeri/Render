@@ -1,3 +1,6 @@
+import os
+os.system('pip install scikit-learn')  # Temporary workaround for troubleshooting
+
 from flask import Flask, request, jsonify
 import joblib
 import nltk
