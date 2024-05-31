@@ -1,7 +1,7 @@
 import os
 os.system('pip install scikit-learn')  # Temporary workaround for troubleshooting
 
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory
 import joblib
 import nltk
 from nltk.corpus import stopwords
@@ -56,7 +56,7 @@ def predict():
 
 @app.route('/', methods=['GET'])
 def home():
-    return send_from_directory('static', 'index.html')
+    return render_template('index.html') 
 
 if __name__ == '__main__':
     app.run(debug=True)
