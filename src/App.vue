@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import SpamHam from './components/SpamHam.vue';
+import SpamHam from './src/components/SpamHam.vue';
 
 export default {
   name: 'App',

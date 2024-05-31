@@ -9,7 +9,7 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import re
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.', static_folder='src', static_url_path='/src')
 
 # Ensure the necessary NLTK data is downloaded
 nltk.download('punkt')
