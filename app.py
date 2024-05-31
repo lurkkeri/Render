@@ -1,7 +1,7 @@
 import os
 os.system('pip install scikit-learn')  # Temporary workaround for troubleshooting
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import joblib
 import nltk
 from nltk.corpus import stopwords
@@ -37,8 +37,7 @@ def preprocess_text(text):
 # Load the pickled model
 model = joblib.load('spam_model.pkl')
 
-#@app.route('/predict', methods=['POST'])
-@app.route('/', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     # Get the input data from the request
     input_data = request.json['sentence']
@@ -54,6 +53,10 @@ def predict():
     
     # Return the prediction result as JSON
     return jsonify({'prediction': result})
+
+@app.route('/', methods=['GET'])
+def home():
+    return send_from_directory('static', 'index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

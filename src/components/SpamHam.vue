@@ -25,7 +25,7 @@ export default {
     async submitSentence() {
       if (this.sentence.trim()) {
         try {
-          const response = await axios.post('https://render-0w2u.onrender.com', {
+          const response = await axios.post('https://render-0w2u.onrender.com/predict', {
             sentence: this.sentence
           });
           const sentimentClass = response.data.prediction === 'Ham' ? 'ham' : 'spam';
