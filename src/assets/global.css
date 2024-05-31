@@ -1,0 +1,11 @@
+
+#app {
+    width: 100%; 
+    height: 400px; 
+  }
+
+body{
+    padding: 20px;
+    margin: 0;
+    background-color:bisque;
+}
