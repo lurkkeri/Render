@@ -37,7 +37,8 @@ def preprocess_text(text):
 # Load the pickled model
 model = joblib.load('spam_model.pkl')
 
-@app.route('/predict', methods=['POST'])
+#@app.route('/predict', methods=['POST'])
+@app.route('/', methods=['POST'])
 def predict():
     # Get the input data from the request
     input_data = request.json['sentence']
