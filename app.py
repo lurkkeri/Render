@@ -38,6 +38,14 @@ def preprocess_text(text):
 # Load the pickled model
 model = joblib.load('spam_model.pkl')
 
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('index.html') 
+
+@app.route('/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(app.static_folder, filename)
+
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get the input data from the request
@@ -55,13 +63,7 @@ def predict():
     # Return the prediction result as JSON
     return jsonify({'prediction': result})
 
-@app.route('/', methods=['GET'])
-def home():
-    return render_template('index.html') 
 
-@app.route('/<path:filename>')
-def serve_static(filename):
-    return send_from_directory(app.static_folder, filename)
 
 if __name__ == '__main__':
     app.run(debug=True)

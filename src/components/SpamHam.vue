@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     async submitSentence() {
+    
       if (this.sentence.trim()) {
         try {
           const response = await axios.post('https://render-0w2u.onrender.com/predict', {
