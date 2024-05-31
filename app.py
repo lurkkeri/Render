@@ -9,7 +9,8 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import re
 
-app = Flask(__name__, template_folder='.', static_folder='src', static_url_path='/src')
+#app = Flask(__name__, template_folder='.', static_folder='src', static_url_path='/src')
+app = Flask(__name__, static_folder='dist', template_folder='dist')
 
 # Ensure the necessary NLTK data is downloaded
 nltk.download('punkt')
@@ -57,6 +58,10 @@ def predict():
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html') 
+
+@app.route('/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(app.static_folder, filename)
 
 if __name__ == '__main__':
     app.run(debug=True)

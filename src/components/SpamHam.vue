@@ -40,7 +40,7 @@ export default {
   }
 };
 </script>
-  </script>
+
   
   <style scoped>
   /* Your CSS styles here */

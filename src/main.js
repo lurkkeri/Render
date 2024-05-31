@@ -1,6 +1,6 @@
-import './assets/main.css'
 
-import { createApp } from '../node_modules/vue'
+
+import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 import App from './App.vue'
 
 createApp(App).mount('#app')
