@@ -5,7 +5,7 @@
 
 <template>
    <div id="app">
-    <SpamHam />
+    <SpamHam/>
   </div>
 </template>
 

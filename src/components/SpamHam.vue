@@ -1,8 +1,7 @@
-
 <template>
   <div class="container">
     <h2>Submit a sentence and we'll determine if it is spam or ham</h2>
-    <input type="text" id="sentence" v-model="sentence" placeholder="Write your sentence">
+    <SpamHamInput v-model="sentence" />
     <button @click="submitSentence">Submit</button>
     <div id="sentences" class="sentences">
       <div v-for="(item, index) in sentences" :key="index" :class="['sentence', item.sentimentClass]">
@@ -12,74 +11,77 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
 import axios from 'axios';
+import SpamHamInput from './SpamHamInput.vue';
 
-export default {
-  data() {
-    return {
-      sentence: '',
-      sentences: []
-    };
-  },
-  methods: {
-    async submitSentence() {
-    
-      if (this.sentence.trim()) {
-        try {
-          console.log("Submitting sentence:", this.sentence);
-          const response = await axios.post('https://render-0w2u.onrender.com/predict', {
-            sentence: this.sentence
-          });
+const sentence = ref('');
+const sentences = ref([]);
 
-          const sentimentClass = response.data.prediction === 'Ham' ? 'ham' : 'spam';
-          const sentiment = response.data.prediction;
-          this.sentences.push({ text: this.sentence, sentimentClass, sentiment });
-          this.sentence = '';
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      }
+const submitSentence = async () => {
+  console.log('Button clicked');
+  if (sentence.value.trim()) {
+    console.log('Sentence to be sent:', sentence.value);
+    try {
+      const response = await axios.post('https://render-0w2u.onrender.com/predict', {
+        sentence: sentence.value,
+      });
+      console.log('Response received:', response);
+      const sentimentClass = response.data.prediction === 'Ham' ? 'ham' : 'spam';
+      const sentiment = response.data.prediction;
+      sentences.value.push({ text: sentence.value, sentimentClass, sentiment });
+      sentence.value = '';
+    } catch (error) {
+      console.error('Error:', error);
     }
   }
 };
 </script>
 
-  
 <style scoped>
 .container {
-    width: 100%; /* Example: 100% width */
-    height: 400px; 
-    margin: auto;
-    background-color: #ccc;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+  width: 100%;
+  height: 400px;
+  margin: auto;
+  background-color: #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+}
+
+.sentences {
+  width: 100%;
+  height: 100px;
+  padding: 20px;
 }
 
 input[type="text"] {
-    width: calc(100% - 100px);
-    padding: 10px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+  width: calc(100% - 100px);
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
+
 button {
-    width: 90px;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+  width: 90px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
 }
+
 .sentence {
-    border-left: 5px solid #ccc;
+  border-left: 5px solid #ccc;
 }
+
 .ham {
-    border-left-color: #4CAF50;
+  border-left-color: #4caf50;
 }
+
 .spam {
-    border-left-color: #F44336;
+  border-left-color: #f44336;
 }
 </style>
-  
