@@ -1,9 +1,8 @@
 
-
 <template>
   <div class="container">
     <h2>Submit a sentence and we'll determine if it is spam or ham</h2>
-    <input type="text" v-model="sentence" placeholder="Write your sentence">
+    <input type="text" id="sentence" v-model="sentence" placeholder="Write your sentence">
     <button @click="submitSentence">Submit</button>
     <div id="sentences" class="sentences">
       <div v-for="(item, index) in sentences" :key="index" :class="['sentence', item.sentimentClass]">
@@ -15,7 +14,7 @@
 
 <script>
 import axios from 'axios';
-console.log("spamham");
+
 export default {
   data() {
     return {
@@ -28,9 +27,11 @@ export default {
     
       if (this.sentence.trim()) {
         try {
+          console.log("Submitting sentence:", this.sentence);
           const response = await axios.post('https://render-0w2u.onrender.com/predict', {
             sentence: this.sentence
           });
+
           const sentimentClass = response.data.prediction === 'Ham' ? 'ham' : 'spam';
           const sentiment = response.data.prediction;
           this.sentences.push({ text: this.sentence, sentimentClass, sentiment });
@@ -54,6 +55,7 @@ export default {
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
 }
+
 input[type="text"] {
     width: calc(100% - 100px);
     padding: 10px;

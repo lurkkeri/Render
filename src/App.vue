@@ -4,8 +4,8 @@
 </script>
 
 <template>
-  <div id="app">
-    <SpamHam />  
+   <div id="app">
+    <SpamHam />
   </div>
 </template>
 
